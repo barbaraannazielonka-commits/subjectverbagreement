@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Subject-Verb Agreement Lab</title>
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--tx:#1d1d1b;--mu:#666;--ln:#dcd9d0;--ac:#1f6feb;--ok:#1a7f4b;--okb:#e0f3e8;--no:#c0392b;--nob:#fbe4e1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16171a;--card:#202226;--tx:#ecebe6;--mu:#9a9a94;--ln:#383a40;--ac:#6ea8ff;--ok:#5fd394;--okb:#17372a;--no:#ff8a7a;--nob:#3d1f1b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#16171a;--card:#202226;--tx:#ecebe6;--mu:#9a9a94;--ln:#383a40;--ac:#6ea8ff;--ok:#5fd394;--okb:#17372a;--no:#ff8a7a;--nob:#3d1f1b;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:.2em 0}h2{font-size:1.2rem;margin:.8em 0 .3em}
+.sub{color:var(--mu);margin:0 0 12px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+nav button,.btn{font:inherit;border:1px solid var(--ln);background:var(--card);color:var(--tx);padding:10px 16px;border-radius:10px;cursor:pointer}
+nav button.on,.btn.p{background:var(--ac);color:#fff;border-color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:14px 16px;margin:10px 0}
+details{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:10px 14px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+u{text-decoration:underline;text-underline-offset:3px}.v{text-decoration:underline double;text-underline-offset:3px;font-weight:600}
+.ex{background:var(--bg);border-radius:8px;padding:6px 10px;margin:6px 0}
+.bad{color:var(--no)}.good{color:var(--ok)}
+.lv{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.lv b{display:block}.st{color:#e0a100;letter-spacing:2px;white-space:nowrap}
+.q{font-size:1.2rem;margin:10px 0}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.opts button,.w{font:inherit;padding:10px 14px;border:1px solid var(--ln);border-radius:10px;background:var(--card);color:var(--tx);cursor:pointer;text-align:left}
+.opts.col{flex-direction:column}.opts.col button{width:100%}
+.opts button:hover:not(:disabled){border-color:var(--ac)}
+.ok{background:var(--okb)!important;border-color:var(--ok)!important}.no{background:var(--nob)!important;border-color:var(--no)!important}
+input[type=text]{font:inherit;padding:6px 10px;width:9em;border:2px solid var(--ln);border-radius:8px;background:var(--card);color:var(--tx)}
+.bar{height:8px;background:var(--ln);border-radius:4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac);transition:width .3s}
+.fb{padding:10px 12px;border-radius:10px;margin:10px 0}
+.meta{display:flex;justify-content:space-between;color:var(--mu);font-size:.9rem;margin:8px 0 4px}
+.tag{font-size:.8rem;color:var(--mu);text-transform:uppercase;letter-spacing:.05em}
+.big{font-size:2.4rem;text-align:center;margin:6px 0}
+.mz{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;max-width:420px;margin:10px auto}.mz div{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:5px;font-size:1.2rem;background:var(--card);border:1px solid var(--ln)}.mz .wl{background:var(--tx);border-color:var(--tx);opacity:.85}.mz .gt{background:#f5c542;border-color:#c99a00}.mz .fn{background:var(--okb);border-color:var(--ok)}.dp{display:grid;grid-template-columns:repeat(3,64px);gap:6px;justify-content:center;margin:8px auto}.dp button{height:48px;font-size:1.3rem}
+.ew{font:inherit;padding:1px 7px;margin:0 1px;border-radius:7px;cursor:pointer;border:1px dashed var(--mu);background:var(--card);color:var(--tx)}.ew.sel{background:var(--ac);border:1px solid var(--ac);color:#fff}.ew.ms{background:#f5c54255;border:1px solid #c99a00}.ew:disabled{cursor:default;color:var(--tx)}.ew.sel:disabled{color:#fff}
+</style></head><body><main>
+<h1>Subject-Verb Agreement Lab</h1>
+<p class="sub">Learn the rules, then train until the right verb feels automatic.</p>
+<nav><button id="tl" class="on" onclick="tab('l')">Learn</button><button id="tp" onclick="tab('p')">Practice</button><button id="tm" onclick="tab('m')">Maze game</button><button id="th" onclick="tab('h')">Error hunt</button><button id="tb" onclick="tab('b')">Boss battle</button><button id="ts" onclick="tab('s')">My score</button><span id="pts" style="margin-left:auto;align-self:center;font-weight:600">0 points</span></nav>
+<div id="learn"></div><div id="prac" hidden></div><div id="maze" hidden></div><div id="hunt" hidden></div><div id="boss" hidden></div><div id="score" hidden></div>
+<footer style="margin:28px 0 8px;padding-top:12px;border-top:1px solid var(--ln);text-align:center;color:var(--tx);font-size:1.3rem;font-weight:600">Nannestad High School – Barbara Anna Zielonka</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const U=s=>"<u>"+s+"</u>",V=s=>"<span class=v>"+s+"</span>";
+const theory=[
+["The basic rule","A singular subject takes a singular verb. A plural subject takes a plural verb.<div class=ex>The "+U("list")+" of items "+V("is")+" on the desk.</div><div class=ex>The "+U("cars")+" "+V("shine")+" in the sun.</div>Two special cases:<br>• <b>I</b> uses the base form of the verb: <i>I go, I drive</i> (with <i>be</i>: <i>I am</i>).<br>• After <i>watch, see, hear, feel, help, let, make</i> we use the base form: <i>He watched Ronaldo score the winning goal.</i>"],
+["Rule 1: The subject comes before “of”","The word <i>of</i> starts a phrase that you can skip. Find the subject <b>before</b> it.<div class=ex class=bad><span class=bad>A bouquet of yellow roses lend color.</span></div><div class=ex><span class=good>A "+U("bouquet")+" of yellow roses "+V("lends")+" color.</span></div>"],
+["Rule 2: Words that interrupt","<i>Along with, as well as, besides, not</i> and anything in brackets are not part of the subject. Ignore them.<div class=ex>The "+U("politician")+", along with the newsmen, "+V("is")+" expected shortly.</div><div class=ex>"+U("Joe")+" (and his trusty mutt) "+V("was")+" always welcome.</div>"],
+["Rule 3: Subjects joined by “and”","Two or more subjects joined by <i>and</i> usually take a plural verb.<div class=ex>A "+U("car")+" and a "+U("bike")+" "+V("are")+" my means of transportation.</div>Exception: a compound noun is one thing.<div class=ex>"+U("Breaking and entering")+" "+V("is")+" against the law. / The "+U("bed and breakfast")+" "+V("was")+" charming.</div>"],
+["Rule 4: or, either/or, neither/nor","Two singular subjects joined by <i>or / nor</i> take a singular verb. With a mix of singular and plural, the verb agrees with the subject <b>closest to it</b>.<div class=ex>Either "+U("Kiana")+" or "+U("Casey")+" "+V("is")+" helping.</div><div class=ex>Neither the plates nor the "+U("serving bowl")+" "+V("goes")+" on that shelf.</div><div class=ex>Neither the serving bowl nor the "+U("plates")+" "+V("go")+" on that shelf.</div>With <i>I</i> the result can sound odd (<i>Neither she, my friends, nor I am going</i>). Reword it: <i>She, my friends, and I are not going.</i>"],
+["Rule 5: Here and there","After <i>here</i> and <i>there</i>, the real subject comes <b>after</b> the verb.<div class=ex>There "+V("are")+" four "+U("hurdles")+" to jump.</div><div class=ex>Here "+V("are")+" the "+U("keys")+".</div>Never use <i>there’s</i> with a plural subject. <span class=bad>There’s a lot of people here.</span> <span class=good>There are a lot of people here.</span>"],
+["Rule 6: Distances, time and money","Treat a distance, a period of time or a sum of money as one unit: singular verb.<div class=ex>Three "+U("miles")+" "+V("is")+" too far to walk.</div><div class=ex>Ten "+U("dollars")+" "+V("is")+" a high price.</div>But if you mean the separate items, use plural: <i>Ten dollars (the bills) were scattered on the floor.</i>"],
+["Rule 7: Portions (a lot of, some, all, half, 50 percent)","Here the rule from Rule 1 is <b>reversed</b>: look at the noun <b>after</b> “of”.<div class=ex>Some of the "+U("pie")+" "+V("is")+" missing.</div><div class=ex>Some of the "+U("pies")+" "+V("are")+" missing.</div><i>None</i> can be singular or plural. When it means “not one”, use a singular verb."],
+["Rule 8: Collective nouns (group, jury, family, staff)","A collective noun can take a singular verb (the group as one) or a plural verb (the members as individuals). Be consistent.<div class=ex><span class=bad>The staff is deciding how they want to vote.</span></div><div class=ex><span class=good>The staff are deciding how they want to vote.</span> or <span class=good>The staff members are deciding…</span></div>"],
+["Rule 9: Wishes and “if” that is not true (subjunctive)","Use <b>were</b> for wishes and things contrary to fact, even with singular subjects. Use the base form after verbs of request or demand.<div class=ex>If Joe "+V("were")+" here, you’d be sorry. / I wish it "+V("were")+" Friday.</div><div class=ex>She requested that he "+V("raise")+" his hand.</div>"]
+];
+$("learn").innerHTML="<div class=card><b>Your 3-step method</b><br>1. Find the verb.<br>2. Ask “who or what?” to find the subject. Skip <i>of</i>-phrases and interrupters.<br>3. Is the subject singular or plural? Match the verb.<br><span class=sub>In the examples below, the subject has one line under it and the verb has two.</span></div>"+theory.map((t,i)=>"<details"+(i<1?" open":"")+"><summary>"+t[0]+"</summary><p>"+t[1]+"</p></details>").join("")+"<p><button class='btn p' onclick=\"tab('p')\">Start practising</button></p>";
+
+// Item types: mc [q,opts,correctIdx,expl] · ty [q,[answers],expl] · su [sentence,subjectWordIdx,expl] · tf [sentence,bool,expl] · fx [prompt,opts,correctIdx,expl]
+const LV=[
+{n:"Level 1",t:"The basics",d:"Singular and plural, I, base forms",it:[
+["mc","My cat ___ on the sofa all day.",["sleeps","sleep"],0,"Cat is singular, so sleeps."],
+["mc","My dogs ___ every morning in the park.",["runs","run"],1,"Dogs is plural, so use run."],
+["mc","She ___ the bus to school.",["take","takes"],1,"She is singular, so takes."],
+["mc","I ___ to school by bike.",["go","goes"],0,"I uses the base form: I go."],
+["tf","The buses arrives at eight.",false,"Buses is plural, so: The buses arrive at eight."],
+["ty","Bill ___ (go) to the gym on Fridays.",["goes"],"Bill is singular: goes."],
+["su","The tall boy in the red jacket waits outside.",2,"The subject is boy. The jacket is only a detail."],
+["mc","We heard the choir ___ a beautiful song.",["sing","sings"],0,"After watch, see, hear, feel, help, let, make we use the base form: heard the choir sing."],
+["ty","The children ___ (play) outside.",["play"],"Children is plural: play."],
+["tf","I am happy when I play music.",true,"Correct. With be, I takes am."]]},
+{n:"Level 2",t:"Of-phrases and interrupters",d:"Find the real subject",it:[
+["mc","A basket of red apples ___ on the table.",["stands","stand"],0,"The subject is basket, not apples."],
+["su","The box of old photos is under the bed.",1,"Subject: box. Skip “of old photos”."],
+["mc","The captain, together with the players, ___ waiting for the bus.",["is","are"],0,"Together with… is not part of the subject. Captain is singular."],
+["fx","Which sentence is correct?",["Excitement, as well as nervousness, is the cause of her shaking.","Excitement, as well as nervousness, are the cause of her shaking.","Excitement, as well as nervousness, were the cause of her shaking."],0,"Ignore “as well as nervousness”. Excitement is singular."],
+["ty","The pile of books ___ (be) heavy.",["is"],"Subject: pile. Singular: is."],
+["tf","My sister (and her two cats) live in Oslo.",false,"Brackets are not part of the subject. My sister lives in Oslo."],
+["mc","The teacher, not the students, ___ responsible for the schedule.",["is","are"],0,"Not the students is an interrupter. Teacher is singular."],
+["su","The price of the tickets has gone up.",1,"Subject: price. Verb: has gone."],
+["mc","One of my friends ___ a drone.",["has","have"],0,"Subject: One. Skip “of my friends”."],
+["ty","The cost of all these new phones ___ (be) very high.",["is"],"Subject: cost. Singular: is."]]},
+{n:"Level 3",t:"And, or, nor",d:"Joined subjects and compound nouns",it:[
+["mc","My aunt or my uncle ___ arriving by train today.",["is","are"],0,"Two singular subjects joined by or: singular verb."],
+["mc","Either the cat or the dogs ___ in the garden.",["is","are"],1,"Agree with the closest subject: dogs (plural)."],
+["mc","Either the dogs or the cat ___ in the garden.",["is","are"],0,"Closest subject: cat (singular)."],
+["mc","My cousin and his friend ___ coming to the party.",["is","are"],1,"Two subjects joined by and: plural."],
+["mc","Macaroni and cheese ___ my favorite dinner.",["is","are"],0,"Compound noun: one dish, so singular."],
+["tf","Rock and roll were my grandfather’s favorite music.",false,"Rock and roll is one kind of music: was."],
+["ty","Either Maria or Jonas ___ (be) giving the speech.",["is"],"Two singular subjects with or: is."],
+["fx","Which is the best way to fix: “Neither the boys, the girls, nor I am ready”?",["The boys, the girls, and I are ready.","The boys, the girls, and I is ready.","The boys, the girls, and I am ready."],0,"Rewording avoids the awkward am and uses and + plural."],
+["mc","Neither the manager nor the workers ___ happy with the new rules.",["is","are"],1,"Closest subject: workers (plural)."],
+["ty","Sara and Leo ___ (be) in my class.",["are"],"Two subjects joined by and: are."]]},
+{n:"Level 4",t:"There, units, portions, groups",d:"The trickiest rules",it:[
+["mc","There ___ three apples in the bowl.",["is","are"],1,"The subject comes after the verb: apples (plural)."],
+["mc","Here ___ my notes from class.",["is","are"],1,"Subject: notes."],
+["fx","Fix: “There’s lots of cookies on the plate.”",["There are lots of cookies on the plate.","There is lots of cookie on the plate.","There’s lots of cookies on the plate."],0,"Cookies is plural, so there are."],
+["mc","Twenty kilometers ___ too far to walk.",["is","are"],0,"A distance is one unit."],
+["mc","Fifty kroner ___ a fair price for a sandwich.",["is","are"],0,"A sum of money is one unit."],
+["mc","Half of the cake ___ gone.",["is","are"],0,"With portions, look after of: cake (singular)."],
+["mc","Half of the cookies ___ gone.",["is","are"],1,"Cookies is plural."],
+["mc","Some of the water ___ spilled.",["has","have"],0,"Water is singular."],
+["tf","Seventy percent of the students has passed the test.",false,"Students is plural: have passed."],
+["mc","The team ___ celebrating because they won.",["is","are"],1,"The pronoun they is plural, so keep the verb plural too: the team are celebrating. Stay consistent within one sentence."],
+["ty","A quarter of the books ___ (be) missing.",["are"],"Look after of: books (plural)."],
+["ty","Ten minutes ___ (be) enough time for this task.",["is"],"A period of time is one unit."]]},
+{n:"Level 5",t:"Boss level",d:"Mixed rules, wishes and requests",it:[
+["mc","If she ___ taller, she would play basketball.",["was","were"],1,"Contrary to fact: subjunctive were."],
+["mc","I wish I ___ a better singer.",["was","were"],1,"A wish: were."],
+["mc","The teacher insists that every student ___ on time.",["arrives","arrive"],1,"After insist: base form."],
+["mc","The coach suggested that he ___ earlier.",["starts","start"],1,"After suggest: base form."],
+["mc","One of the cars in the lot ___ mine.",["is","are"],0,"Subject: One."],
+["ty","The box of chocolates ___ (be) on the table.",["is"],"Subject: box."],
+["su","There are two exits at the back of the hall.",3,"After There are, the subject follows: exits."],
+["fx","Which sentence is correct?",["Neither the teacher nor the students were ready.","Neither the teacher nor the students was ready.","Neither the teacher nor the students is ready."],0,"Closest subject: students (plural)."],
+["tf","A third of the people are unemployed.",true,"Correct. People is plural."],
+["tf","The list of names are long.",false,"Subject: list. The list of names is long."],
+["ty","Neither my brother nor my parents ___ (like) horror films.",["like"],"Closest subject: parents (plural)."],
+["tf","There is some chairs in the hall.",false,"Chairs is plural and follows the verb: There are some chairs."]]}
+];
+const ALL=LV.flatMap(l=>l.it);
+const MP=[
+["mc","The students in the hall ___ waiting for the bell.",["is","are"],1,"Subject: students (plural)."],
+["mc","The bag of oranges ___ heavy.",["is","are"],0,"Subject: bag (singular)."],
+["ty","Neither the singer nor the dancers ___ (be) here.",["are"],"Closest subject: dancers (plural)."],
+["tf","My parents or my grandfather are picking me up.",false,"Closest subject: grandfather (singular): is picking."],
+["mc","There ___ many reasons to read.",["is","are"],1,"The subject follows the verb: reasons (plural)."],
+["mc","Twelve hours ___ a long time to wait.",["is","are"],0,"A period of time is one unit."],
+["fx","Which sentence is correct?",["A third of the students are at the concert.","A third of the students is at the concert.","A third of the students be at the concert."],0,"Look after of: students (plural)."],
+["tf","If I were a bird, I would fly over the sea.",true,"Correct. An unreal situation uses were."]];
+let best={},S=null;
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function tab(t){const m={l:'learn',p:'prac',m:'maze',h:'hunt',b:'boss',s:'score'};for(const k in m){$(m[k]).hidden=k!=t;$('t'+k).className=k==t?'on':''}if(t=='p'&&!S)home();if(t=='m'&&!M)mz();if(t=='h'&&!E)eh(0);if(t=='b'&&!B)bs();if(t=='s')sc();window.scrollTo(0,0)}
+function stars(n){return"★".repeat(n||0)+"☆".repeat(3-(n||0))}
+function home(){S=null;$("prac").innerHTML="<p class=sub>Pick a level. Every level has different task types: multiple choice, typing, find the subject, true or false and sentence repair.</p>"+LV.map((l,i)=>"<div class='card lv'><div><b>"+l.n+": "+l.t+"</b><span class=sub>"+l.d+" · "+l.it.length+" tasks</span></div><div><div class=st>"+stars(best[i])+"</div><button class='btn p' onclick='go("+i+")'>Play</button></div></div>").join("")}
+function go(i,list){const items=list||(i=="m"?sh(ALL).slice(0,12):sh(LV[i].it));S={li:i,q:items,i:0,sc:0,wr:[],done:false,retry:!!list};show()}
+function show(){
+const q=S.q[S.i],t=q[0],n=S.q.length;let h="<div class=meta><span>"+(S.li=="m"?"Mixed mission":LV[S.li].n)+"</span><span>"+(S.i+1)+" / "+n+" · "+S.sc+" correct</span></div><div class=bar><i style='width:"+(S.i/n*100)+"%'></i></div><div class=card>";
+if(t=="mc"){S.o=sh(q[2].map((x,k)=>[x,k==q[3]]));h+="<div class=tag>Choose the verb</div><div class=q>"+q[1].replace("___","<b>_____</b>")+"</div><div class=opts>"+S.o.map((o,k)=>"<button onclick='pick("+k+")'>"+o[0]+"</button>").join("")+"</div>"}
+else if(t=="fx"){S.o=sh(q[2].map((x,k)=>[x,k==q[3]]));h+="<div class=tag>Repair the sentence</div><div class=q>"+q[1]+"</div><div class='opts col'>"+S.o.map((o,k)=>"<button onclick='pick("+k+")'>"+o[0]+"</button>").join("")+"</div>"}
+else if(t=="ty"){h+="<div class=tag>Type the correct form of the verb</div><div class=q>"+q[1].replace("___","<input type=text id=ti autocomplete=off autocapitalize=off onkeydown=\"if(event.key=='Enter')typed()\">")+"</div><button class='btn p' id=cb onclick='typed()'>Check</button>"}
+else if(t=="su"){h+="<div class=tag>Click the subject</div><div class='opts q'>"+q[1].split(" ").map((w,k)=>"<button class=w onclick='sub("+k+")'>"+w+"</button>").join("")+"</div>"}
+else{h+="<div class=tag>Correct or incorrect?</div><div class=q>“"+q[1]+"”</div><div class=opts><button onclick='tf(true)'>Correct</button><button onclick='tf(false)'>Incorrect</button></div>"}
+$("prac").innerHTML=h+"</div><div id=fb></div>";
+const ti=$("ti");if(ti)ti.focus()}
+function lock(){document.querySelectorAll("#prac button:not(.btn)").forEach(b=>b.disabled=true);const c=$("cb");if(c)c.disabled=true;const ti=$("ti");if(ti)ti.disabled=true}
+function fin(ok,e){const q=S.q[S.i];ok?S.sc++:S.wr.push(q);lock();const last=S.i==S.q.length-1;
+$("fb").innerHTML="<div class='fb "+(ok?"ok":"no")+"'><b>"+(ok?"Correct!":"Not quite.")+"</b> "+e+"</div><button class='btn p' onclick='nxt()'>"+(last?"See results":"Next")+"</button>"}
+function pick(k){const q=S.q[S.i],o=S.o;document.querySelectorAll("#prac .opts button").forEach((b,j)=>{if(o[j][1])b.classList.add("ok");else if(j==k)b.classList.add("no")});fin(o[k][1],q[0]=="mc"?q[4]:q[4])}
+function typed(){const q=S.q[S.i],v=$("ti").value.trim().toLowerCase();if(!v)return;const ok=q[2].includes(v);$("ti").classList.add(ok?"ok":"no");fin(ok,(ok?"":"The answer is <b>"+q[2][0]+"</b>. ")+q[3])}
+function sub(k){const q=S.q[S.i];document.querySelectorAll("#prac .w").forEach((b,j)=>{if(j==q[2])b.classList.add("ok");else if(j==k)b.classList.add("no")});fin(k==q[2],q[3])}
+function tf(v){const q=S.q[S.i];fin(v==q[2],q[3])}
+function nxt(){S.i++;S.i<S.q.length?show():end()}
+function end(){if(!S.retry&&S.li!='m')SC.p[S.li]=Math.max(SC.p[S.li],S.sc);upd();const n=S.q.length,p=S.sc/n,s=p>=.9?3:p>=.7?2:p>=.5?1:0,k=S.li;best[k]=Math.max(best[k]||0,s);
+const msg=s==3?"Excellent. You really see the subject now.":s==2?"Strong work. A little more practice and it will be automatic.":s==1?"Good start. Review the rules, then try again.":"Keep going. Re-read the rules in Learn and try again.";
+$("prac").innerHTML="<div class=card><div class=big>"+stars(s).replace(/(.)/g,"$1 ")+"</div><h2 style='text-align:center'>"+S.sc+" / "+n+"</h2><p style='text-align:center'>"+msg+"</p><p style='text-align:center'>"+(S.wr.length?"<button class='btn p' onclick='go(S.li,sh(S.wr))'>Retry "+S.wr.length+" mistake"+(S.wr.length>1?"s":"")+"</button> ":"")+"<button class=btn onclick='go(S.li)'>Play again</button> <button class=btn onclick='home()'>All levels</button> <button class=btn onclick='ts()'>My total score</button></p></div>"}
+const MZ=['#########','#S..#...#','#.#.#.#.#','#.#D..#.#','#.###.#D#','#...#.#.#','###.D.#.#','#...#...E','#########'];
+let M=null;
+function mz(){M={p:[1,1],open:{},hp:3,mv:0,g:null,end:0,msg:'',ok:true};mdraw()}
+function mdraw(){SC.m=Math.max(SC.m,Object.keys(M.open).length+(M.end>0?5+M.hp:0));upd();let g='';for(let r=0;r<9;r++)for(let c=0;c<9;c++){const ch=MZ[r][c];let k='',x='';if(ch=='#')k='wl';else if(ch=='D'&&!M.open[r+','+c]){k='gt';x='🔒'}else if(ch=='D'){x='🔓'}else if(ch=='E'){k='fn';x='🏁'}if(M.p[0]==r&&M.p[1]==c)x='🙂';g+=`<div class='${k}'>${x}</div>`}
+let h=`<p class=sub>Walk through the maze to the flag. A locked gate 🔒 only opens if you choose the correct answer. Use the arrow keys or the buttons. A wrong answer costs a life.</p><div class=meta><span>Lives: ${'❤️'.repeat(M.hp)||'💔'}</span><span>Moves: ${M.mv}</span></div><div class=mz>${g}</div>`;
+if(M.msg)h+=`<div class='fb ${M.ok?'ok':'no'}'>${M.msg}</div>`;
+if(M.end)h+=`<div class=card><h2>${M.end>0?'You made it out! 🎉':'Out of lives 💔'}</h2><p>${M.end>0?'Finished in '+M.mv+' moves with '+M.hp+(M.hp==1?' life':' lives')+' left.':'Read the rules again and try a new run.'}</p><button class='btn p' onclick='mz()'>Play again</button> <button class=btn onclick='ts()'>My total score</button></div>`;
+else if(M.g)h+=gq();
+else h+=`<div class=dp><span></span><button class=btn onclick='mv(-1,0)'>▲</button><span></span><button class=btn onclick='mv(0,-1)'>◀</button><button class=btn onclick='mv(1,0)'>▼</button><button class=btn onclick='mv(0,1)'>▶</button></div>`;
+$('maze').innerHTML=h;const ti=$('mi');if(ti)ti.focus()}
+function gq(){const q=M.g.q,t=q[0];let h=`<div class=card><div class=tag>🔒 Gate: ${t=='ty'?'type the verb form':t=='tf'?'is the sentence correct?':t=='fx'?'choose the correct sentence':'choose the correct verb'}</div>`;
+if(t=='mc'||t=='fx')h+=`<div class=q>${t=='fx'?'':''}${q[1].replace('___','<b>_____</b>')}</div><div class='opts ${t=='fx'?'col':''}'>`+M.g.o.map(o=>`<button onclick='ma(${o[1]})'>${o[0]}</button>`).join('')+'</div>';
+else if(t=='ty')h+=`<div class=q>${q[1].replace('___','<input type=text id=mi autocomplete=off autocapitalize=off onkeydown=\'if(event.keyCode==13)mt()\'>')}</div><button class='btn p' onclick='mt()'>Open</button>`;
+else h+=`<div class=q>“${q[1]}”</div><div class=opts><button onclick='ma(${q[2]})'>Correct</button><button onclick='ma(${!q[2]})'>Incorrect</button></div>`;
+return h+'</div>'}
+function mt(){const v=$('mi').value.trim().toLowerCase();if(!v)return;ma(M.g.q[2].includes(v))}
+function ma(ok){const g=M.g,q=g.q,e=q[q.length-1];M.ok=ok;if(ok){M.open[g.r+','+g.c]=1;M.p=[g.r,g.c];M.mv++;M.msg='Gate open! '+e}else{M.hp--;M.msg='Not quite. '+(q[0]=='ty'?'Answer: '+q[2][0]+'. ':'')+e+' Try the gate again for a new question.';if(M.hp<1)M.end=-1}M.g=null;mdraw()}
+function mv(dr,dc){if(M.g||M.end)return;const r=M.p[0]+dr,c=M.p[1]+dc,ch=(MZ[r]||'')[c];if(!ch||ch=='#')return;M.msg='';if(ch=='D'&&!M.open[r+','+c]){M.used=M.used||{};const av=MP.map((x,i)=>i).filter(i=>!M.used[i]);const ix=sh(av)[0];M.used[ix]=1;const q=MP[ix];M.g={r,c,q,o:(q[0]=='mc'||q[0]=='fx')?sh(q[2].map((x,k)=>[x,k==q[3]])):null};mdraw();return}M.p=[r,c];M.mv++;if(ch=='E'){M.end=1;M.ok=true}mdraw()}
+document.addEventListener('keydown',e=>{if($('maze').hidden||!M||M.g||M.end)return;const k={ArrowUp:[-1,0],ArrowDown:[1,0],ArrowLeft:[0,-1],ArrowRight:[0,1]}[e.key];if(k){e.preventDefault();mv(k[0],k[1])}});
+const EH=[{n:'The class trip',x:`The list of things we had to pack [were>was>The subject is list (singular). Skip “of things”.] very long. Neither Sara nor her brothers [was>were>Closest subject: brothers (plural).] ready on time. There [was>were>The subject follows the verb: teachers (plural).] two teachers at the front of the bus. Three hours [were>was>A period of time is one unit.] too long to wait, and the driver, along with two parents, [were>was>Along with is an interrupter, so the subject is driver (singular).] still looking for the keys. A lot of the snacks [were] gone before we arrived, but the view from the mountain [was] worth it.`},
+{n:'Football weekend',x:`My brother and his friends [plays>play>Two subjects joined by and: plural.] football every Saturday. A bag of old balls [are>is>The subject is bag (singular). Skip “of old balls”.] kept in the garage. Neither the coach nor the players [was>were>Closest subject: players (plural).] happy with the last result. Fifty percent of the pitch [were>was>Look after of: pitch (singular).] under water. Here [is>are>The subject follows the verb: tickets (plural).] the tickets for next week’s game. Ten euros [is] a fair price for one, and a third of the fans [were] already waiting outside.`},
+{n:'A message to a friend',x:`Hi Mia! The rules of the game [is>are>The subject is rules (plural), not game.] really simple. Either you or Tom [have>has>Closest subject: Tom (singular).] to bring the cards. Some of the pizza [were>was>Look after of: pizza (singular).] left, but I [goes>go>I uses the base form.] to the cinema every Saturday anyway. If I [was>were>An unreal situation uses the subjunctive: were.] you, I would come too! There [are] three films on, and my cousin, together with her friends, [is] coming.`}];
+let E=null;
+function eh(p){const tk=[];const h=EH[p].x.replace(/\[([^\]]+)\]/g,(m,s)=>{const a=s.split('>');tk.push({w:a[0],c:a[1],e:a[2]});const i=tk.length-1;return `<button class=ew id='et${i}' onclick='et(${i})'>${a[0]}</button>`});E={p,tk,h,sel:{},done:false};edraw()}
+function edraw(){$('hunt').innerHTML=`<p class=sub>Read the text and click every verb that is wrong. The verbs you can click have dashed boxes, but not all of them are mistakes. Each text has 5 mistakes. Then press Check.</p><div class=opts>${EH.map((t,i)=>`<button class='${i==E.p?'btn p':'btn'}' onclick='eh(${i})'>Text ${i+1}: ${t.n}</button>`).join('')}</div><div class=card style='line-height:2.3'>${E.h}</div><div id=er></div><button class='btn p' id=ec onclick='ech()'>Check</button>`}
+function et(i){if(E.done)return;E.sel[i]=!E.sel[i];$('et'+i).classList.toggle('sel',!!E.sel[i])}
+function ech(){E.done=true;let f=0,fa=0,b=0,ex='';E.tk.forEach((t,i)=>{const el=$('et'+i),s=E.sel[i];el.classList.remove('sel');el.disabled=true;if(t.c){b++;if(s){f++;el.classList.add('ok')}else el.classList.add('ms');el.innerHTML='<s>'+t.w+'</s> '+t.c;ex+=`<li><b>${t.w} → ${t.c}</b>: ${t.e}</li>`}else if(s){fa++;el.classList.add('no')}});
+const good=f==b&&!fa;SC.h[E.p]=Math.max(SC.h[E.p],Math.max(f-fa,0));upd();$('ec').textContent='Try this text again';$('ec').setAttribute('onclick','eh(E.p)');
+$('er').innerHTML=`<div class='fb ${good?'ok':'no'}'><b>You found ${f} of ${b} mistakes${fa?' and marked '+fa+' verb'+(fa>1?'s':'')+' that '+(fa>1?'were':'was')+' already correct':''}.</b> ${good?'Perfect!':'Green = found, yellow = missed, red = already correct.'}</div><ul>${ex}</ul><button class=btn onclick='ts()'>My total score</button>`}
+const BO=[
+{n:'The Of-Ghost',e:'👻',d:'Hides the real subject behind “of” and interrupters',hp:4,p:[
+["mc","The jar of cookies ___ on the shelf.",["is","are"],0,"Subject: jar (singular)."],
+["mc","The members of the band ___ tired.",["is","are"],1,"Subject: members (plural)."],
+["mc","The mayor, as well as the councillors, ___ at the meeting.",["is","are"],0,"As well as… is an interrupter. Mayor is singular."],
+["tf","The color of the walls are blue.",false,"Subject: color (singular): is blue."],
+["ty","The carton of eggs ___ (be) in the fridge.",["is"],"Subject: carton (singular)."],
+["fx","Which sentence is correct?",["The teacher, besides her students, is going on the trip.","The teacher, besides her students, are going on the trip.","The teacher, besides her students, were going on the trip."],0,"Besides her students is an interrupter. Teacher is singular."],
+["mc","The sound of the church bells ___ across the valley.",["carries","carry"],0,"Subject: sound (singular)."],
+["tf","My dad (and his old friends) is coming to the concert.",true,"Correct. Brackets are not part of the subject: My dad is coming."]]},
+{n:'The Or-Nor Spider',e:'🕷️',d:'Weaves together and, or and nor',hp:4,p:[
+["mc","Pizza and pasta ___ my favorite foods.",["is","are"],1,"Two subjects joined by and: plural."],
+["mc","Either my mom or my dad ___ driving us.",["is","are"],0,"Two singular subjects joined by or: singular."],
+["mc","Neither the actors nor the director ___ pleased.",["was","were"],0,"Closest subject: director (singular)."],
+["mc","Neither the director nor the actors ___ pleased.",["was","were"],1,"Closest subject: actors (plural)."],
+["ty","Anna and her brothers ___ (go) skiing every winter.",["go"],"Two subjects joined by and: plural."],
+["tf","Lena and Tom is late.",false,"Two subjects joined by and: Lena and Tom are late."],
+["fx","Which sentence is correct?",["Neither the dog nor the cats like the rain.","Neither the dog nor the cats likes the rain.","Neither the dog nor the cats liking the rain."],0,"Closest subject: cats (plural)."],
+["ty","Either Ben or his sisters ___ (be) cooking tonight.",["are"],"Closest subject: sisters (plural)."]]},
+{n:'The Portion Dragon',e:'🐉',d:'Breathes there/here, units, portions and groups',hp:4,p:[
+["mc","There ___ a problem with my phone.",["is","are"],0,"The subject follows the verb: problem (singular)."],
+["mc","Here ___ the pictures from our trip.",["is","are"],1,"Subject: pictures (plural)."],
+["mc","Six weeks ___ a long summer break.",["is","are"],0,"A period of time is one unit."],
+["mc","All of the sand ___ wet.",["is","are"],0,"With portions, look after of: sand (singular)."],
+["mc","All of the shoes ___ wet.",["is","are"],1,"Shoes is plural."],
+["tf","Ninety percent of the water are clean.",false,"Water is singular: is clean."],
+["ty","Five hundred kroner ___ (be) a lot of money for a T-shirt.",["is"],"A sum of money is one unit."],
+["fx","Which sentence is correct?",["There are many people in the queue.","There is many people in the queue.","There’s many people in the queue."],0,"People is plural, so there are."]]},
+{n:'The Grammar King',e:'👑',d:'Final boss: everything, including wishes and requests',hp:6,p:[
+["mc","If I ___ you, I would ask for help.",["was","were"],1,"Contrary to fact: were."],
+["mc","The school requires that students ___ their phones in a locker.",["keeps","keep"],1,"After require: base form."],
+["mc","The pile of dirty plates ___ growing every day.",["is","are"],0,"Subject: pile (singular)."],
+["mc","Neither the girls nor the boy ___ the answer.",["know","knows"],1,"Closest subject: boy (singular)."],
+["tf","There is a lot of stars in the sky tonight.",false,"Stars is plural: There are a lot of stars."],
+["ty","A quarter of the pizza ___ (be) left.",["is"],"Look after of: pizza (singular)."],
+["fx","Which sentence is correct?",["Three days is not enough time to finish.","Three days are not enough time to finish.","Three days be not enough time to finish."],0,"A period of time is one unit."],
+["ty","The price of the new shoes ___ (be) too high.",["is"],"Subject: price (singular)."],
+["mc","I wish my brother ___ here.",["was","were"],1,"A wish: were."],
+["mc","My teacher, along with two other teachers, ___ organizing the trip.",["is","are"],0,"Along with… is an interrupter. Teacher is singular."]]}
+];
+let B=null;
+function bs(){B={i:0,hp:5,st:0,end:0};bn()}
+function bn(){const b=BO[B.i];B.mx=B.bh=b.hp;B.pool=sh(b.p);B.k=0;B.dead=0;B.st=0;bq()}
+function bq(){const q=B.pool[B.k++%B.pool.length];B.q=q;B.o=(q[0]=='mc'||q[0]=='fx')?sh(q[2].map((x,k)=>[x,k==q[3]])):null;B.ans=0;B.msg='';B.v='';bd()}
+function bqh(){const q=B.q,t=q[0],d=B.ans?' disabled':'';let h=`<div class=card><div class=tag>${t=='ty'?'type the verb form':t=='tf'?'is the sentence correct?':t=='fx'?'choose the correct sentence':'choose the correct verb'}</div>`;
+if(t=='mc'||t=='fx')h+=`<div class=q>${q[1].replace('___','<b>_____</b>')}</div><div class='opts ${t=='fx'?'col':''}'>${B.o.map(o=>`<button${d} onclick='bk(${o[1]})'>${o[0]}</button>`).join('')}</div>`;
+else if(t=='ty')h+=`<div class=q>${q[1].replace('___',`<input type=text id=bi value='${B.v}'${d} autocomplete=off autocapitalize=off onkeydown='if(event.keyCode==13)bt()'>`)}</div><button class='btn p'${d} onclick='bt()'>Attack</button>`;
+else h+=`<div class=q>“${q[1]}”</div><div class=opts><button${d} onclick='bk(${q[2]})'>Correct</button><button${d} onclick='bk(${!q[2]})'>Incorrect</button></div>`;
+return h+'</div>'}
+function bd(){const b=BO[B.i];SC.b=Math.max(SC.b,(B.i+((B.dead||B.end>0)?1:0))*3+(B.end>0?B.hp:0));upd();let h=`<p class=sub>Answer correctly to hit the boss. Three correct answers in a row give a critical hit (double damage). A wrong answer costs you a heart.</p><div class=meta><span>Boss ${B.i+1} / ${BO.length}</span><span>You: ${'❤️'.repeat(Math.max(B.hp,0))||'💔'}</span></div><div class=card style='text-align:center'><div style='font-size:3.5rem'>${b.e}</div><b>${b.n}</b><br><span class=sub>${b.d}</span><div class=bar><i style='width:${Math.max(B.bh,0)/B.mx*100}%;background:var(--no)'></i></div><div class=meta><span>Boss HP ${Math.max(B.bh,0)} / ${B.mx}</span><span>Streak: ${'🔥'.repeat(Math.min(B.st,3))||'–'}</span></div></div>`;
+if(!B.end&&!B.dead)h+=bqh();
+if(B.msg)h+=`<div class='fb ${B.ok?'ok':'no'}'>${B.msg}</div>`;
+if(B.end)h+=`<div class=card style='text-align:center'><div class=big>${B.end>0?'🏆':'💀'}</div><h2>${B.end>0?'You beat all four bosses!':'You were defeated'}</h2><p>${B.end>0?'Hearts left: '+B.hp+'. Subject-verb agreement master!':'Review the rules in Learn and fight again.'}</p><button class='btn p' onclick='bs()'>Play again</button> <button class=btn onclick='ts()'>My total score</button></div>`;
+else if(B.dead)h+=`<div class='fb ok'><b>${b.n} is defeated!</b> You heal 1 ❤️ for the next fight.</div><button class='btn p' onclick='bx()'>Next boss</button>`;
+else if(B.ans)h+=`<button class='btn p' onclick='bq()'>Next question</button>`;
+$('boss').innerHTML=h;const bi=$('bi');if(bi&&!B.ans)bi.focus()}
+function bk(ok){if(B.ans)return;B.ans=1;const q=B.q,e=q[q.length-1];B.ok=ok;if(ok){B.st++;const dm=B.st>=3?2:1;B.bh-=dm;B.msg=(dm>1?'🔥 Critical hit! −2 boss HP. ':'✅ Hit! −1 boss HP. ')+e}else{B.st=0;B.hp--;B.msg='❌ The boss strikes! −1 ❤️. '+(q[0]=='ty'?'Answer: '+q[2][0]+'. ':'')+e}
+if(B.hp<1)B.end=-1;else if(B.bh<1){if(B.i==BO.length-1)B.end=1;else B.dead=1}bd()}
+function bt(){const v=$('bi').value.trim().toLowerCase();if(!v)return;B.v=v;bk(B.q[2].includes(v))}
+function bx(){B.i++;B.hp=Math.min(5,B.hp+1);bn()}
+let SC={p:[0,0,0,0,0],m:0,h:[0,0,0],b:0,name:''};
+const sm=a=>a.reduce((x,y)=>x+y,0);
+function parts(){return[['Practice levels',sm(SC.p),ALL.length],['Maze game',SC.m,11],['Error hunt',sm(SC.h),EH.length*5],['Boss battle',SC.b,17]]}
+function tot(){return parts().reduce((a,r)=>a+r[1],0)}
+function upd(){$('pts').textContent=tot()+' points'}
+function ts(){tab('s')}
+function rs(){SC={p:[0,0,0,0,0],m:0,h:[0,0,0],b:0,name:SC.name};best={};S=M=E=B=null;upd();sc()}
+function sc(){const P=parts(),T=tot(),X=P.reduce((a,r)=>a+r[2],0),pc=Math.round(T/X*100);
+const msg=pc>=85?'Outstanding! You have really mastered subject-verb agreement.':pc>=60?'Well done! Keep practising the rules that felt tricky.':pc>=30?'Good start. Play more levels and games to raise your score.':'You have just started. Try the practice levels and the games to earn points.';
+$('score').innerHTML=`<div class=card style='text-align:center'><div class=tag>Your session result</div><div class=big>${T} / ${X}</div><b>${pc}% of all possible points</b><p>${msg}</p><div style='font-weight:600;font-size:1.1rem' id=sn2></div><div class=sub>${new Date().toLocaleDateString('en-GB')}</div><p><input type=text id=sn placeholder='Type your name' style='width:14em'></p><div class=sub>Type your name, then take a screenshot to show your teacher.</div></div><div class=card>${P.map(r=>`<div class=meta style='font-size:1rem;color:var(--tx)'><span>${r[0]}</span><b>${r[1]} / ${r[2]}</b></div><div class=bar><i style='width:${r[1]/r[2]*100}%'></i></div>`).join('')}<p class=sub>Practice by level: ${LV.map((l,i)=>l.n.replace('Level ','L')+' '+SC.p[i]+'/'+l.it.length).join(' · ')}</p></div><div class=card><b>How points work</b><br><span class=sub>Practice: 1 point per correct answer (your best result per level). Maze: 1 point per gate opened, plus 5 for reaching the flag and 1 per heart left. Error hunt: 1 point per mistake found, minus 1 per correct verb marked wrongly (best result per text). Boss battle: 3 points per boss defeated, plus 1 per heart left if you beat the final boss. Replaying a game only raises your score if you do better than before.</span></div><p><button class=btn onclick='rs()'>Start a new session (resets points)</button></p>`;
+const sn=$('sn');sn.value=SC.name;$('sn2').textContent=SC.name;sn.oninput=()=>{SC.name=sn.value;$('sn2').textContent=sn.value}}
+</script></body></html>
